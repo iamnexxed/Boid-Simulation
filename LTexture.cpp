@@ -116,13 +116,9 @@ bool LTexture::LoadFromRenderedText(SDL_Renderer* renderer, const char* text, SD
 
 void LTexture::Render(int* x, int* y, SDL_Rect* clip, double* angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-	
 
 	xPosition = *x - offsetX;
 	yPosition = *y - offsetY;
-
-	printf("\nRendering on : %d, %d", xPosition, yPosition);
-
 
 	SDL_Rect renderQuad = { xPosition, yPosition, mWidth * scale, mHeight * scale };
 

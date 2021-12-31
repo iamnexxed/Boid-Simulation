@@ -114,7 +114,7 @@ int main( int argc, char* args[] )
 	GameObject boid1;
 	boid1.AddBehaviour(bS);
 
-	boid1.transform.scale = 1;
+	boid1.transform.scale = 0.1;
 	SDL_Point point;
 	point.x = SCREEN_WIDTH / 2;
 	point.y = SCREEN_HEIGHT / 2;
