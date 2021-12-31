@@ -107,13 +107,13 @@ int main( int argc, char* args[] )
 	{
 		printf("Failed to load media!\n");
 	}*/
+
 	Sprite bS;
 	bS.LoadSpriteTexture(gRenderer, "Sprites/up-arrow.png", 1);
 	GameObject boid1;
 	boid1.AddBehaviour(bS);
 
 	boid1.transform.scale = 0.1f;
-	boid1.transform.rotation = 100;
 
 	//Main loop flag
 	bool quit = false;
@@ -187,8 +187,7 @@ int main( int argc, char* args[] )
 
 		//spriteSheetTexture.SetColor(r, g, b);
 
-		boid1.transform.rotation += 1;
-		boid1.transform.scale += 0.01;
+		boid1.transform.rotation += 10;
 
 		boid1.UpdateObject();
 
@@ -211,8 +210,6 @@ int main( int argc, char* args[] )
 
 		//Update screen
 		SDL_RenderPresent(gRenderer);
-
-		
 	}
 	
 	//Free resources and close SDL
