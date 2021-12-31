@@ -22,6 +22,10 @@ private:
 	int mWidth;
 	int mHeight;
 
+	// Image offset
+	int offsetX;
+	int offsetY;
+
 	float scale;
 
 public:
@@ -40,6 +44,9 @@ public:
 
 	int GetXPos();
 	int GetYPos();
+
+	void SetOffsetX(int value);
+	void SetOffsetY(int value);
 
 	void SetScale(double value);
 

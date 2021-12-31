@@ -4,7 +4,10 @@ Sprite::Sprite()
 {
 	clips = NULL;
 	noOfSprites = 0;
+	offsetX = 0;
+	offsetY = 0;
 	texture.Free();
+	
 }
 
 Sprite::~Sprite()
@@ -32,6 +35,7 @@ void Sprite::LoadSpriteTexture(SDL_Renderer* renderer, const char* path, int spr
 		{
 			noOfSprites = 1;
 		}
+
 	}
 	
 }
@@ -59,6 +63,8 @@ void Sprite::Render(int* x, int* y, SDL_Rect* clip, double* angle, SDL_Point* ce
 }
 
 
+
+
 void Sprite::Start() 
 {
 }
@@ -66,6 +72,9 @@ void Sprite::Start()
 void Sprite::Update()
 {
 	//printf("\nTransform position : %d, %d \n", transform->position.x, transform->position.y);
+	//transform->position.x -= offsetX;
+	//transform->position.y -= offsetY;
+
 	Render(&transform->position.x, &transform->position.y, NULL,  &transform->rotation, NULL, SDL_FLIP_NONE, &transform->scale);
 }
 

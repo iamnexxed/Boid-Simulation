@@ -110,10 +110,15 @@ int main( int argc, char* args[] )
 
 	Sprite bS;
 	bS.LoadSpriteTexture(gRenderer, "Sprites/up-arrow.png", 1);
+	
 	GameObject boid1;
 	boid1.AddBehaviour(bS);
 
-	boid1.transform.scale = 0.1f;
+	boid1.transform.scale = 1;
+	SDL_Point point;
+	point.x = SCREEN_WIDTH / 2;
+	point.y = SCREEN_HEIGHT / 2;
+	boid1.transform.position = point;
 
 	//Main loop flag
 	bool quit = false;

@@ -10,6 +10,9 @@ private:
 	LTexture texture;
 	SDL_Rect* clips;
 	int noOfSprites;
+	int offsetX;
+	int offsetY;
+
 public:
 	Sprite();
 	~Sprite();
@@ -19,6 +22,7 @@ public:
 	int GetClipCount();
 	void SetTextureScale(double value);
 	void Render(int* x, int* y, SDL_Rect* clip = NULL, double* angle = nullptr, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, double* scale = nullptr);
+
 
 	void Start() override;
 	void Update() override;

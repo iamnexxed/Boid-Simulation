@@ -9,6 +9,8 @@ LTexture::LTexture()
 	mHeight = 0;
 	xPosition = 0;
 	yPosition = 0;
+	offsetX = 0;
+	offsetY = 0;
 	scale = 1.0f;
 }
 
@@ -43,7 +45,8 @@ bool LTexture::LoadFromFile(SDL_Renderer* renderer, const char* path)
 		{
 			mWidth = loadedSurface->w;
 			mHeight = loadedSurface->h;
-
+			offsetX = mWidth * scale / 2;
+			offsetY = mHeight * scale / 2;
 			printf("Loaded image : %s with width: %d, height: %d\n", path, mWidth, mHeight);
 		}
 		SDL_FreeSurface(loadedSurface);
@@ -100,6 +103,8 @@ bool LTexture::LoadFromRenderedText(SDL_Renderer* renderer, const char* text, SD
 		{
 			mWidth = textSurface->w;
 			mHeight = textSurface->h;
+			offsetX = mWidth * scale / 2;
+			offsetY = mHeight * scale / 2;
 		}
 		SDL_FreeSurface(textSurface);
 	}
@@ -111,10 +116,17 @@ bool LTexture::LoadFromRenderedText(SDL_Renderer* renderer, const char* text, SD
 
 void LTexture::Render(int* x, int* y, SDL_Rect* clip, double* angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-	SDL_Rect renderQuad = { *x, *y, mWidth * scale, mHeight * scale };
+	
 
-	xPosition = *x;
-	yPosition = *y;
+	xPosition = *x - offsetX;
+	yPosition = *y - offsetY;
+
+	printf("\nRendering on : %d, %d", xPosition, yPosition);
+
+
+	SDL_Rect renderQuad = { xPosition, yPosition, mWidth * scale, mHeight * scale };
+
+
 
 	if (clip != NULL)
 	{
@@ -139,7 +151,8 @@ void LTexture::SetScale(double value)
 {
 	
 	scale = value > 0.0f ? value : 1.0f;
-
+	offsetX = mWidth * scale / 2;
+	offsetY = mHeight * scale / 2;
 }
 
 
@@ -166,4 +179,14 @@ int LTexture::GetXPos()
 int LTexture::GetYPos()
 {
 	return yPosition;
+}
+
+void LTexture::SetOffsetX(int value)
+{
+	offsetX = value;
+}
+
+void LTexture::SetOffsetY(int value)
+{
+	offsetY = value;
 }
