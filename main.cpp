@@ -10,6 +10,7 @@ and may not be redistributed without written permission.*/
 #include "LButton.h"
 #include <SDL_ttf.h>
 #include "GameObject.h"
+#include "Boid.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 800;
@@ -110,15 +111,17 @@ int main( int argc, char* args[] )
 
 	Sprite bS;
 	bS.LoadSpriteTexture(gRenderer, "Sprites/up-arrow.png", 1);
-	
-	GameObject boid1;
-	boid1.AddBehaviour(bS);
+	Boid boid1(5);
 
-	boid1.transform.scale = 0.1;
-	SDL_Point point;
-	point.x = SCREEN_WIDTH / 2;
-	point.y = SCREEN_HEIGHT / 2;
-	boid1.transform.position = point;
+	GameObject boidObject;
+	SDL_Point p;
+	p.x = SCREEN_WIDTH / 2;
+	p.y = SCREEN_HEIGHT / 2;
+	boidObject.transform.position = p;
+	boidObject.transform.scale = 0.5;
+	boidObject.AddBehaviour(bS);
+	boidObject.AddBehaviour(boid1);
+
 
 	//Main loop flag
 	bool quit = false;
@@ -192,9 +195,9 @@ int main( int argc, char* args[] )
 
 		//spriteSheetTexture.SetColor(r, g, b);
 
-		boid1.transform.rotation += 10;
+		//boidObject.transform.rotation += 10;
 
-		boid1.UpdateObject();
+		boidObject.UpdateObject();
 
 		// Keyboard key sprites
 		//spriteSheetTexture.SetAlpha(a);

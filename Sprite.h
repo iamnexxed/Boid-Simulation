@@ -21,7 +21,7 @@ public:
 	SDL_Rect* GetClip(int index);
 	int GetClipCount();
 	void SetTextureScale(double value);
-	void Render(int* x, int* y, SDL_Rect* clip = NULL, double* angle = nullptr, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, double* scale = nullptr);
+	void Render(int x, int y, SDL_Rect* clip = NULL, double* angle = nullptr, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, double* scale = nullptr);
 
 
 	void Start() override;

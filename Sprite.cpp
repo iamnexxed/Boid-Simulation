@@ -56,7 +56,7 @@ int Sprite::GetClipCount()
 	return noOfSprites;
 }
 
-void Sprite::Render(int* x, int* y, SDL_Rect* clip, double* angle, SDL_Point* center, SDL_RendererFlip flip, double* scale)
+void Sprite::Render(int x, int y, SDL_Rect* clip, double* angle, SDL_Point* center, SDL_RendererFlip flip, double* scale)
 {
 	texture.SetScale(*scale);
 	texture.Render(x, y, clip, angle, center, flip);
@@ -75,7 +75,7 @@ void Sprite::Update()
 	//transform->position.x -= offsetX;
 	//transform->position.y -= offsetY;
 
-	Render(&transform->position.x, &transform->position.y, NULL,  &transform->rotation, NULL, SDL_FLIP_NONE, &transform->scale);
+	Render(transform->position.x, transform->position.y, NULL,  &transform->rotation, NULL, SDL_FLIP_NONE, &transform->scale);
 }
 
 void Sprite::Destroy()

@@ -120,7 +120,7 @@ void LButton::SetTextureClip(int index, SDL_Rect* rect)
 void LButton::Render()
 {
 	if(buttonImageSprite.GetClipCount() > 0)
-		buttonImageSprite.Render(&mPosition.x, &mPosition.y, buttonImageSprite.GetClip(currentSprite));
+		buttonImageSprite.Render(mPosition.x, mPosition.y, buttonImageSprite.GetClip(currentSprite));
 	else
 		printf("Sprite sheet on button has no clips!");
 }

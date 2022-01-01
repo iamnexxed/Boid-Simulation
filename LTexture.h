@@ -37,7 +37,7 @@ public:
 	bool LoadFromRenderedText(SDL_Renderer* renderer, const char* text, SDL_Color textColor, const char* fontPath, int size);
 
 	void Free();
-	void Render(int* x, int* y, SDL_Rect* clip = NULL, double* angle = nullptr, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void Render(int x, int y, SDL_Rect* clip = NULL, double* angle = nullptr, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	int GetWidth();
 	int GetHeight();

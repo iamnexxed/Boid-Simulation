@@ -57,7 +57,7 @@ void Animation::Animate(int cyclesPerFrame)
 
 	// Render Current Frame
 	SDL_Rect* currentClip = &animClips[currentFrame / cyclesPerFrame];
-	spriteSheetTexture.Render(&xAnimPos, &yAnimPos, currentClip);
+	spriteSheetTexture.Render(xAnimPos, yAnimPos, currentClip);
 
 	++currentFrame;
 	if (currentFrame / cyclesPerFrame >= animationFrameCount)
