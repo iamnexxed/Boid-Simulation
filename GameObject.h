@@ -16,6 +16,7 @@ public:
 	~GameObject();
 	void AddBehaviour(ObjectBehaviour& newBehaviour);
 	int GetBehaviourCount();
+	void StartObject();
 	void UpdateObject();
-
+	void DestroyObject();
 };

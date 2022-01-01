@@ -21,6 +21,15 @@ int GameObject::GetBehaviourCount()
 	return behaviourCount;
 }
 
+void GameObject::StartObject()
+{
+	std::unordered_set<ObjectBehaviour*>::iterator start;
+	for (start = behaviours.begin(); start != behaviours.end(); start++)
+	{
+		start._Ptr->_Myval->Start();
+	}
+}
+
 
 void GameObject::UpdateObject()
 {
@@ -28,6 +37,15 @@ void GameObject::UpdateObject()
 	for (start = behaviours.begin(); start != behaviours.end(); start++)
 	{
 		start._Ptr->_Myval->Update();
+	}
+}
+
+void GameObject::DestroyObject()
+{
+	std::unordered_set<ObjectBehaviour*>::iterator start;
+	for (start = behaviours.begin(); start != behaviours.end(); start++)
+	{
+		start._Ptr->_Myval->Destroy();
 	}
 }
 

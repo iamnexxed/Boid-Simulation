@@ -128,7 +128,7 @@ int main( int argc, char* args[] )
 	boidObject.transform.scale = 0.1;
 	boidObject.AddBehaviour(bS);
 	boidObject.AddBehaviour(boid1);
-
+	boidObject.StartObject();
 
 	//Main loop flag
 	bool quit = false;
@@ -164,6 +164,9 @@ int main( int argc, char* args[] )
 				
 				case SDLK_w:
 					flipType = SDL_FLIP_HORIZONTAL;
+					velX = rand() % (5 + 5 + 1) - 5;
+					velY = rand() % (5 + 5 + 1) - 5;
+					boid1.SetVelocity(velX, velY);
 					break;
 				case SDLK_s:
 					flipType = SDL_FLIP_NONE;

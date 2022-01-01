@@ -12,8 +12,8 @@ private:
 public:
 	Boid();
 	Boid(int velocityX, int velocityY);
-	SDL_Point GetSpeed();
-	
+	SDL_Point GetVelocity();
+	void SetVelocity(int velocityX, int velocityY);
 
 	void Start() override;
 	void Update() override;
