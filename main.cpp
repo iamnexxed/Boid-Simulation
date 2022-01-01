@@ -116,7 +116,7 @@ int main( int argc, char* args[] )
 	int velX = rand() % (5 + 5 + 1) - 5;
 	int velY = rand() % (5 + 5 + 1) - 5;
 	
-	printf("Generated Random values: %d and %d", velX, velY);
+	//printf("Generated Random values: %d and %d", velX, velY);
 
 	Boid boid1(velX, velY);
 
