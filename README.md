@@ -1,7 +1,7 @@
 # Boid-Simulation
  Boid simulation using personal engine
 
-Changed SDL_Point to
+Changed SDL_Point in SDL_rect.h to
 
 ```cpp
 /**
