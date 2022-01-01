@@ -15,7 +15,6 @@ typedef struct SDL_Point
     int x;
     int y;
 
-public:
     SDL_Point()
     {
         x = 0;
