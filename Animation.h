@@ -1,6 +1,5 @@
 #pragma once
 #include "LTexture.h"
-#include <SDL.h>
 #include "ObjectBehaviour.h"
 
 class Animation : public ObjectBehaviour

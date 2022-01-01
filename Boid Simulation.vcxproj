@@ -33,6 +33,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Boid.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="LButton.h" />
     <ClInclude Include="LTexture.h" />
     <ClInclude Include="ObjectBehaviour.h" />

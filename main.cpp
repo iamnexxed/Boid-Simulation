@@ -1,23 +1,20 @@
 /*This source code copyrighted by Lazy Foo' Productions (2004-2020)
 and may not be redistributed without written permission.*/
 
-//Using SDL and standard IO
-#include <SDL.h>
-#include <stdio.h>
-#include <SDL_image.h>
+
+
 #include "LTexture.h"
 #include "Animation.h"
 #include "LButton.h"
-#include <SDL_ttf.h>
+
 #include "GameObject.h"
 #include "Boid.h"
+#include "Global.h"
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
 
 //Starts up SDL and creates window
 bool init();
+
 // Window Name
 #define WINDOW_NAME "Boids"
 
@@ -111,7 +108,7 @@ int main( int argc, char* args[] )
 
 	Sprite bS;
 	bS.LoadSpriteTexture(gRenderer, "Sprites/up-arrow.png", 1);
-	Boid boid1(5);
+	Boid boid1(1);
 
 	GameObject boidObject;
 	SDL_Point p;

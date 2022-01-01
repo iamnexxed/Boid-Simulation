@@ -1,6 +1,7 @@
 #pragma once
-#include <SDL.h>
+#include "Global.h"
 #include "Transform.h"
+
 
 class ObjectBehaviour
 {

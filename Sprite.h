@@ -1,7 +1,6 @@
 #pragma once
 
 #include "LTexture.h"
-#include <SDL.h>
 #include "ObjectBehaviour.h"
 
 class Sprite : public ObjectBehaviour

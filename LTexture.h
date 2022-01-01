@@ -1,10 +1,6 @@
 #pragma once
 
-#include <SDL.h>
-#include <stdio.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-
+#include "Global.h"
 
 class LTexture 
 {

@@ -1,5 +1,5 @@
 #include "Boid.h"
-#include <stdio.h>
+
 Boid::Boid()
 {
 	speed = 0;
@@ -19,11 +19,29 @@ void Boid::Start()
 
 void Boid::Update()
 {
-	//printf("\nCalling update: %d, %d with speed %d", transform->position.x, transform->position.y, speed);
-	SDL_Point p;
-	p.x = speed;
-	p.y = speed;
-	transform->position -= p;
+	
+
+	SDL_Point p(rand() % speed - speed, -speed);
+
+	transform->position += p;
+	if (transform->position.x <= 0)
+	{
+		transform->position.x = SCREEN_WIDTH;
+	}
+	else if (transform->position.x > SCREEN_WIDTH)
+	{
+		transform->position.x = 0;
+	}
+
+	if (transform->position.y <= 0)
+	{
+		transform->position.y = SCREEN_HEIGHT;
+	}
+	else if (transform->position.y > SCREEN_HEIGHT)
+	{
+		transform->position.y = 0;
+	}
+
 }
 
 void Boid::Destroy()
