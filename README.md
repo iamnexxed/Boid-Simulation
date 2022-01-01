@@ -42,3 +42,46 @@ typedef struct SDL_Point
     }
 } SDL_Point;
 ```
+
+Changed SDL_FPoint in SDL_rect.h to
+
+```cpp
+
+/**
+ * The structure that defines a point (floating point)
+ *
+ * \sa SDL_EnclosePoints
+ * \sa SDL_PointInRect
+ */
+typedef struct SDL_FPoint
+{
+    float x;
+    float y;
+
+    SDL_FPoint()
+    {
+        x = 0.0f;
+        y = 0.0f;
+    }
+    SDL_FPoint(float x, float y)
+    {
+        this->x = x;
+        this->y = y;
+    }
+
+    void operator += (SDL_FPoint& otherPoint)
+    {
+
+        x += otherPoint.x;
+        y += otherPoint.y;
+
+    }
+
+    void operator -= (SDL_FPoint& otherPoint)
+    {
+
+        x -= otherPoint.x;
+        y -= otherPoint.y;
+    }
+} SDL_FPoint;
+```
