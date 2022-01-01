@@ -15,8 +15,7 @@ and may not be redistributed without written permission.*/
 //Starts up SDL and creates window
 bool init();
 
-// Window Name
-#define WINDOW_NAME "Boids"
+
 
 
 /// <summary>
@@ -46,9 +45,7 @@ SDL_Texture* loadTexture(const char* path);
 
 SDL_Renderer* gRenderer = NULL;
 
-//SDL_Texture* gTexture = NULL;
 
-//SDL_Texture* planTexture = NULL;
 
 void RenderTexture(SDL_Renderer* renderer, SDL_Texture* texture, int x, int y, int width, int height);
 
@@ -108,14 +105,27 @@ int main( int argc, char* args[] )
 
 	Sprite bS;
 	bS.LoadSpriteTexture(gRenderer, "Sprites/up-arrow.png", 1);
-	Boid boid1(1);
+
+	time_t t1; // declare time variable  
+
+	srand((unsigned)time(&t1)); // pass the srand() parameter  
+
+	// To generate a random number between min and max
+	// int randNum = rand() % (max - min + 1) + min;
+
+	int velX = rand() % (5 + 5 + 1) - 5;
+	int velY = rand() % (5 + 5 + 1) - 5;
+	
+	printf("Generated Random values: %d and %d", velX, velY);
+
+	Boid boid1(velX, velY);
 
 	GameObject boidObject;
 	SDL_Point p;
 	p.x = SCREEN_WIDTH / 2;
 	p.y = SCREEN_HEIGHT / 2;
 	boidObject.transform.position = p;
-	boidObject.transform.scale = 0.5;
+	boidObject.transform.scale = 0.1;
 	boidObject.AddBehaviour(bS);
 	boidObject.AddBehaviour(boid1);
 

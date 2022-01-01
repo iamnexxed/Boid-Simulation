@@ -5,13 +5,15 @@ class Boid : public ObjectBehaviour
 {
 
 private:
-	int speed = 3;
-
+	
+	SDL_Point velocity;
+	void ApplyRotation();
 
 public:
 	Boid();
-	Boid(int speed);
-	int GetSpeed();
+	Boid(int velocityX, int velocityY);
+	SDL_Point GetSpeed();
+	
 
 	void Start() override;
 	void Update() override;
