@@ -3,7 +3,7 @@
 
 Changed SDL_Point to
 
-```
+```cpp
 /**
  * The structure that defines a point (integer)
  *
