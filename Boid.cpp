@@ -74,7 +74,34 @@ SDL_FPoint Boid::LimitMagnitude(SDL_FPoint direction, double limit)
 
 SDL_FPoint Boid::Separation()
 {
-	SDL_FPoint p;
+	SDL_FPoint p(0, 0);
+	SDL_FPoint average;
+	int otherCount = 0;
+	for (int i = 0; i < NOOFBOIDS; ++i)
+	{
+		if (others[i].id != this->id)
+		{
+			double dist = GetDistance(others[i]);
+			if (dist < DETECTION_RADIUS)
+			{
+				average.x += others[i].GetVelocity().x;
+				average.y += others[i].GetVelocity().y;
+				otherCount++;
+			}
+
+		}
+	}
+
+	if (otherCount > 0)
+	{
+		average = average / otherCount;
+		//we get a direction towards the velocity we want to achieve
+		average = average - velocity;
+		average = LimitMagnitude(average, MAX_STEERING_FORCE); // Need to limit the magnitude of velocity
+		//return average;
+	}
+
+
 	return p;
 }
 
@@ -100,7 +127,7 @@ SDL_FPoint Boid::Alignment()
 	if (otherCount > 0)
 	{
 		average = average / otherCount;
-		//Steer towards we get a direction towards the velocity we want to achieve
+		//we get a direction towards the velocity we want to achieve
 		average = average - velocity;
 		average = LimitMagnitude(average, MAX_STEERING_FORCE); // Need to limit the magnitude of velocity
 		return average;
@@ -134,7 +161,7 @@ SDL_FPoint Boid::Cohesion()
 		average = average / otherCount;
 		p.x = average.x - transform->position.x;
 		p.y = average.y - transform->position.y;
-		//p = GetNormalized(p) * 0.2;
+
 		p = p - velocity;
 		p = LimitMagnitude(p, MAX_STEERING_FORCE); // Need to limit the magnitude of velocity
 
@@ -191,7 +218,7 @@ void Boid::Update()
 	SDL_FPoint acceleration;
 	
 
-	acceleration += s;
+	//acceleration += s;
 	acceleration += a;
 	acceleration += c;
 
