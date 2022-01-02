@@ -7,7 +7,7 @@ class Boid : public ObjectBehaviour
 private:
 	
 	SDL_FPoint velocity;
-	void ApplyRotation();
+	void ApplyRotation(SDL_FPoint direction);
 	Boid* others;
 
 public:

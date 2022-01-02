@@ -92,22 +92,23 @@ SDL_FPoint Boid::Cohesion()
 		p.y = average.y - transform->position.y;
 		p = GetNormalized(p);
 
-		return p * STEERING_FORCE;
+		if(p.x > 0.01 && p.y > 0.01)
+			return p * STEERING_FORCE;
 	}
 	
 
 	return p;
 }
 
-void Boid::ApplyRotation()
+void Boid::ApplyRotation(SDL_FPoint direction)
 {
 	SDL_FPoint v1(0.0f, -1.0f);
 	SDL_FPoint v2;
-	double magnitudeVel = std::pow(velocity.x, 2) + std::pow(velocity.y, 2);
+	double magnitudeVel = std::pow(direction.x, 2) + std::pow(direction.y, 2);
 	if (magnitudeVel > 0)
 	{
-		v2.x = velocity.x / std::sqrt(magnitudeVel);
-		v2.y = velocity.y / std::sqrt(magnitudeVel);
+		v2.x = direction.x / std::sqrt(magnitudeVel);
+		v2.y = direction.y / std::sqrt(magnitudeVel);
 
 	
 		double magnitudeV1 = std::sqrt(std::pow(v1.x, 2) + std::pow(v1.y, 2));
@@ -130,14 +131,13 @@ void Boid::ApplyRotation()
 
 void Boid::Start()
 {
-	ApplyRotation();
+	
 }
 
 void Boid::Update()
 {
 	
 
-	ApplyRotation();
 
 	SDL_FPoint s = Separation();
 	SDL_FPoint a = Alignment();
@@ -152,12 +152,12 @@ void Boid::Update()
 
 	printf("\nGot acceleration for boid : %d at %f, %f", id, acceleration.x, acceleration.y);
 
-	velocity += acceleration;
+	//velocity += acceleration;
 
-	transform->position.x += (velocity.x);
-	transform->position.y += (velocity.y);
+	transform->position.x += (velocity.x + acceleration.x);
+	transform->position.y += (velocity.y + acceleration.y);
 
-	//ApplyRotation();
+	ApplyRotation(velocity + acceleration);
 
 	if (transform->position.x <= 0)
 	{
