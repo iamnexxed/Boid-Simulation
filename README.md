@@ -40,6 +40,14 @@ typedef struct SDL_Point
         x -= otherPoint.x;
         y -= otherPoint.y;
     }
+    
+    SDL_Point operator + (SDL_Point& otherPoint)
+    {
+        SDL_Point p;
+        p.x = x + otherPoint.x;
+        p.y = y + otherPoint.y;
+        return p;
+    }
 } SDL_Point;
 ```
 
