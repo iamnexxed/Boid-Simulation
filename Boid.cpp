@@ -6,14 +6,24 @@ Boid::Boid()
 {
 	velocity.x = 0;
 	velocity.y = 0;
+	id = -1;
+	others = nullptr;
+}
+Boid::Boid(int id)
+{
+	velocity.x = 0;
+	velocity.y = 0;
+	this->id = id;
+	others = nullptr;
 }
 Boid::Boid(int velocityX, int velocityY)
 {
+	id = -1;
 	velocity.x = velocityX;
 	velocity.y = velocityY;
-	
+	others = nullptr;
 }
-SDL_Point Boid::GetVelocity()
+SDL_FPoint Boid::GetVelocity()
 {
 	return velocity;
 }
@@ -29,21 +39,63 @@ void Boid::FindOtherBoids(Boid* boids)
 	others = boids;
 }
 
-SDL_Point Boid::Separation()
+int Boid::GetDistance(Boid other)
 {
-	SDL_Point p;
+	SDL_Point dir = transform->position - other.transform->position;
+	SDL_FPoint fDir(dir.x, dir.y);
+	return std::sqrt(std::pow(fDir.x, 2) + std::pow(fDir.y, 2));
+}
+
+SDL_FPoint Boid::GetNormalized(SDL_FPoint point)
+{
+	double magnitudeVel = std::pow(point.x, 2) + std::pow(point.y, 2);
+	if(magnitudeVel > 0)
+		return SDL_FPoint(point.x / std::sqrt(magnitudeVel), point.y / std::sqrt(magnitudeVel));
+	return SDL_FPoint();
+}
+
+SDL_FPoint Boid::Separation()
+{
+	SDL_FPoint p;
 	return p;
 }
 
-SDL_Point Boid::Alignment()
+SDL_FPoint Boid::Alignment()
 {
-	SDL_Point p;
+	SDL_FPoint p;
 	return p;
 }
 
-SDL_Point Boid::Cohesion()
+SDL_FPoint Boid::Cohesion()
 {
-	SDL_Point p;
+	SDL_FPoint p(0, 0);
+	SDL_FPoint average;
+	int otherCount = 0;
+	for (int i = 0; i < NOOFBOIDS; ++i)
+	{
+		if (others[i].id != this->id)
+		{
+			if (GetDistance(others[i]) < DETECTION_RADIUS)
+			{
+				average.x += others[i].transform->position.x;
+				average.y += others[i].transform->position.y;
+				otherCount++;
+			}
+			
+		}
+	}
+
+	if (otherCount > 0)
+	{
+		average = average / otherCount;
+		p.x = average.x - transform->position.x;
+		p.y = average.y - transform->position.y;
+		p = GetNormalized(p);
+
+		return p * STEERING_FORCE;
+	}
+	
+
 	return p;
 }
 
@@ -87,19 +139,23 @@ void Boid::Update()
 
 	ApplyRotation();
 
-	SDL_Point s = Separation();
-	SDL_Point a = Alignment();
-	SDL_Point c = Cohesion();
+	SDL_FPoint s = Separation();
+	SDL_FPoint a = Alignment();
+	SDL_FPoint c = Cohesion();
 
-	SDL_Point acceleration;
+	SDL_FPoint acceleration;
 	
 
 	acceleration += s;
 	acceleration += a;
 	acceleration += c;
 
-	transform->position += (velocity);
-	transform->position += (acceleration);
+	printf("\nGot acceleration for boid : %d at %f, %f", id, acceleration.x, acceleration.y);
+
+	velocity += acceleration;
+
+	transform->position.x += (velocity.x);
+	transform->position.y += (velocity.y);
 
 	//ApplyRotation();
 
