@@ -17,3 +17,13 @@ const int SCREEN_HEIGHT = 600;
 
 // Window Name
 #define WINDOW_NAME "Boids"
+
+
+// Button constants
+const int BUTTON_WIDTH = 125;
+const int BUTTON_HEIGHT = 125;
+const int TOTAL_BUTTONS = 4;
+
+
+// Boid Parameters
+const int NOOFBOIDS = 50;

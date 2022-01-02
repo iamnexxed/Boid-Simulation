@@ -1,6 +1,3 @@
-/*This source code copyrighted by Lazy Foo' Productions (2004-2020)
-and may not be redistributed without written permission.*/
-
 
 
 #include "LTexture.h"
@@ -15,9 +12,6 @@ and may not be redistributed without written permission.*/
 //Starts up SDL and creates window
 bool init();
 
-
-
-
 /// <summary>
 /// Loads Image on a texture pointer
 /// </summary>
@@ -27,7 +21,7 @@ SDL_Texture* LoadMediaOnTexture(const char* path);
 
 bool LoadMedia();
 
-bool LoadBoidMedia();
+void LoadBoids();
 
 //Load suface
 //SDL_Surface* loadSurface(const char* path);
@@ -80,12 +74,15 @@ Animation characterAnim;
 // Font Texture
 LTexture textTexture;
 
-// Button constants
-const int BUTTON_WIDTH = 125;
-const int BUTTON_HEIGHT = 125;
-const int TOTAL_BUTTONS = 4;
 
 LButton topLeftButton;
+
+
+// Boid Objects
+
+Boid tempBoids[NOOFBOIDS];
+GameObject tempBoidObjects[NOOFBOIDS];
+Sprite sprites[NOOFBOIDS];
 
 int main( int argc, char* args[] )
 {
@@ -103,8 +100,7 @@ int main( int argc, char* args[] )
 		printf("Failed to load media!\n");
 	}*/
 
-	Sprite bS;
-	bS.LoadSpriteTexture(gRenderer, "Sprites/up-arrow.png", 1);
+	
 
 	time_t t1; // declare time variable  
 
@@ -113,23 +109,8 @@ int main( int argc, char* args[] )
 	// To generate a random number between min and max
 	// int randNum = rand() % (max - min + 1) + min;
 
-	int velX = rand() % (5 + 5 + 1) - 5;
-	int velY = rand() % (5 + 5 + 1) - 5;
+	LoadBoids();
 	
-	//printf("Generated Random values: %d and %d", velX, velY);
-
-	Boid boid1(velX, velY);
-
-	GameObject boidObject;
-	SDL_Point p;
-	p.x = SCREEN_WIDTH / 2;
-	p.y = SCREEN_HEIGHT / 2;
-	boidObject.transform.position = p;
-	boidObject.transform.scale = 0.1;
-	boidObject.AddBehaviour(bS);
-	boidObject.AddBehaviour(boid1);
-	boidObject.StartObject();
-
 	//Main loop flag
 	bool quit = false;
 
@@ -164,9 +145,7 @@ int main( int argc, char* args[] )
 				
 				case SDLK_w:
 					flipType = SDL_FLIP_HORIZONTAL;
-					velX = rand() % (5 + 5 + 1) - 5;
-					velY = rand() % (5 + 5 + 1) - 5;
-					boid1.SetVelocity(velX, velY);
+					
 					break;
 				case SDLK_s:
 					flipType = SDL_FLIP_NONE;
@@ -207,7 +186,13 @@ int main( int argc, char* args[] )
 
 		//boidObject.transform.rotation += 10;
 
-		boidObject.UpdateObject();
+
+
+		
+		for (int i = 0; i < NOOFBOIDS; i++)
+		{
+			tempBoidObjects[i].UpdateObject();
+		}
 
 		// Keyboard key sprites
 		//spriteSheetTexture.SetAlpha(a);
@@ -504,3 +489,35 @@ bool LoadMedia()
 	return success;
 }
 
+void LoadBoids()
+{
+
+	for (int i = 0; i < NOOFBOIDS; ++i)
+	{
+		int velX = rand() % (5 + 5 + 1) - 5;
+		int velY = rand() % (5 + 5 + 1) - 5;
+
+		//printf("Generated Random values: %d and %d", velX, velY);
+
+		tempBoids[i].SetVelocity(velX, velY);
+
+
+		sprites[i].LoadSpriteTexture(gRenderer, "Sprites/up-arrow.png", 1);
+
+		SDL_Point p;
+		p.x = SCREEN_WIDTH / 2;
+		p.y = SCREEN_HEIGHT / 2;
+		tempBoidObjects[i].transform.position = p;
+		tempBoidObjects[i].transform.scale = 0.1;
+		tempBoidObjects[i].AddBehaviour(sprites[i]);
+		tempBoidObjects[i].AddBehaviour(tempBoids[i]);
+		tempBoidObjects[i].StartObject();
+		
+
+	}
+
+
+
+	
+
+}

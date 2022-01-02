@@ -38,7 +38,7 @@ void Boid::ApplyRotation()
 		double magnitudeV1 = std::sqrt(std::pow(v1.x, 2) + std::pow(v1.y, 2));
 		double magnitudeV2 = std::sqrt(std::pow(v2.x, 2) + std::pow(v2.y, 2));
 
-		double aDotB = v1.x * v2.x + v1.y * v2.y;
+		double aDotB = (double)v1.x * v2.x + (double)v1.y * v2.y;
 		double cosT = aDotB / (magnitudeV1 * magnitudeV2);
 		//cosT *= 180 / M_PI;
 		double angle = std::acos(cosT) * 180 / M_PI;
