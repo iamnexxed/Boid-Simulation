@@ -20,6 +20,8 @@ public:
 	void FindOtherBoids(Boid* boids);
 	int GetDistance(Boid other);
 	SDL_FPoint GetNormalized(SDL_FPoint point);
+	double GetMagnitude(SDL_FPoint point);
+	SDL_FPoint LimitMagnitude(SDL_FPoint direction, double limit);
 
 	SDL_FPoint Separation();
 	SDL_FPoint Alignment();

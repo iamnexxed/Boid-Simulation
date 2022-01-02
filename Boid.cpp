@@ -48,10 +48,28 @@ int Boid::GetDistance(Boid other)
 
 SDL_FPoint Boid::GetNormalized(SDL_FPoint point)
 {
-	double magnitudeVel = std::pow(point.x, 2) + std::pow(point.y, 2);
+	double magnitudeVel = GetMagnitude(point);
 	if(magnitudeVel > 0)
-		return SDL_FPoint(point.x / std::sqrt(magnitudeVel), point.y / std::sqrt(magnitudeVel));
+		return SDL_FPoint(point.x / magnitudeVel, point.y / magnitudeVel);
 	return SDL_FPoint();
+}
+
+double Boid::GetMagnitude(SDL_FPoint point)
+{
+	return std::sqrt(std::pow(point.x, 2) + std::pow(point.y, 2));
+}
+
+SDL_FPoint Boid::LimitMagnitude(SDL_FPoint direction, double limit)
+{
+
+	double magnitude = GetMagnitude(direction);
+	SDL_FPoint unit = GetNormalized(direction);
+	if (magnitude > limit)
+	{
+		return unit * limit;
+	}
+
+	return direction;
 }
 
 SDL_FPoint Boid::Separation()
@@ -84,7 +102,7 @@ SDL_FPoint Boid::Alignment()
 		average = average / otherCount;
 		//Steer towards we get a direction towards the velocity we want to achieve
 		average = average - velocity;
-
+		average = LimitMagnitude(average, MAX_STEERING_FORCE); // Need to limit the magnitude of velocity
 		return average;
 	}
 
@@ -116,10 +134,11 @@ SDL_FPoint Boid::Cohesion()
 		average = average / otherCount;
 		p.x = average.x - transform->position.x;
 		p.y = average.y - transform->position.y;
-		p = GetNormalized(p);
+		//p = GetNormalized(p) * 0.2;
+		p = p - velocity;
+		p = LimitMagnitude(p, MAX_STEERING_FORCE); // Need to limit the magnitude of velocity
 
-		if(p.x > 0.01 && p.y > 0.01)
-			return p * STEERING_FORCE;
+		return p;
 	}
 	
 
@@ -174,14 +193,16 @@ void Boid::Update()
 
 	acceleration += s;
 	acceleration += a;
-	//acceleration += c;
+	acceleration += c;
 
 	printf("\nGot acceleration for boid : %d at %f, %f", id, acceleration.x, acceleration.y);
-
+	
 	transform->position.x += (velocity.x);
 	transform->position.y += (velocity.y);
 
 	velocity += acceleration;
+
+	velocity = GetNormalized(velocity) * BOID_SPEED;
 
 	ApplyRotation(velocity);
 
