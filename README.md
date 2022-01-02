@@ -136,7 +136,7 @@ typedef struct SDL_FPoint
         return p;
     }
 
-    SDL_FPoint operator * (int scalar)
+    SDL_FPoint operator * (float scalar)
     {
         SDL_FPoint p;
         p.x = x * scalar;
@@ -144,7 +144,7 @@ typedef struct SDL_FPoint
         return p;
     }
 
-    SDL_FPoint operator / (int scalar)
+    SDL_FPoint operator / (float scalar)
     {
         SDL_FPoint p;
         p.x = x / scalar;
