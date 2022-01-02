@@ -24,6 +24,29 @@ void Boid::SetVelocity(int velocityX, int velocityY)
 	velocity.y = velocityY;
 }
 
+void Boid::FindOtherBoids(Boid* boids)
+{
+	others = boids;
+}
+
+SDL_Point Boid::Separation()
+{
+	SDL_Point p;
+	return p;
+}
+
+SDL_Point Boid::Alignment()
+{
+	SDL_Point p;
+	return p;
+}
+
+SDL_Point Boid::Cohesion()
+{
+	SDL_Point p;
+	return p;
+}
+
 void Boid::ApplyRotation()
 {
 	SDL_FPoint v1(0.0f, -1.0f);
@@ -64,7 +87,19 @@ void Boid::Update()
 
 	ApplyRotation();
 
-	transform->position += velocity;
+	SDL_Point s = Separation();
+	SDL_Point a = Alignment();
+	SDL_Point c = Cohesion();
+
+	SDL_Point acceleration;
+	
+
+	acceleration += s;
+	acceleration += a;
+	acceleration += c;
+
+	transform->position += (velocity);
+	transform->position += (acceleration);
 
 	//ApplyRotation();
 

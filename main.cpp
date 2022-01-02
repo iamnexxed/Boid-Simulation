@@ -498,7 +498,7 @@ void LoadBoids()
 		int velY = rand() % (5 + 5 + 1) - 5;
 
 		//printf("Generated Random values: %d and %d", velX, velY);
-
+		tempBoids[i].FindOtherBoids(tempBoids);
 		tempBoids[i].SetVelocity(velX, velY);
 
 
