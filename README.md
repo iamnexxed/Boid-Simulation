@@ -4,6 +4,7 @@
 Changed SDL_Point in SDL_rect.h to
 
 ```cpp
+
 /**
  * The structure that defines a point (integer)
  *
@@ -40,7 +41,7 @@ typedef struct SDL_Point
         x -= otherPoint.x;
         y -= otherPoint.y;
     }
-    
+
     SDL_Point operator + (SDL_Point& otherPoint)
     {
         SDL_Point p;
@@ -48,6 +49,32 @@ typedef struct SDL_Point
         p.y = y + otherPoint.y;
         return p;
     }
+
+    SDL_Point operator - (SDL_Point& otherPoint)
+    {
+        SDL_Point p;
+        p.x = x - otherPoint.x;
+        p.y = y - otherPoint.y;
+        return p;
+    }
+
+    SDL_Point operator * (int scalar)
+    {
+        SDL_Point p;
+        p.x = x * scalar;
+        p.y = y * scalar;
+        return p;
+    }
+
+    SDL_Point operator / (int scalar)
+    {
+        SDL_Point p;
+        p.x = x / scalar;
+        p.y = y / scalar;
+        return p;
+    }
+
+ 
 } SDL_Point;
 ```
 
@@ -91,5 +118,40 @@ typedef struct SDL_FPoint
         x -= otherPoint.x;
         y -= otherPoint.y;
     }
+
+
+    SDL_FPoint operator + (SDL_FPoint& otherPoint)
+    {
+        SDL_FPoint p;
+        p.x = x + otherPoint.x;
+        p.y = y + otherPoint.y;
+        return p;
+    }
+
+    SDL_FPoint operator - (SDL_FPoint& otherPoint)
+    {
+        SDL_FPoint p;
+        p.x = x - otherPoint.x;
+        p.y = y - otherPoint.y;
+        return p;
+    }
+
+    SDL_FPoint operator * (int scalar)
+    {
+        SDL_FPoint p;
+        p.x = x * scalar;
+        p.y = y * scalar;
+        return p;
+    }
+
+    SDL_FPoint operator / (int scalar)
+    {
+        SDL_FPoint p;
+        p.x = x / scalar;
+        p.y = y / scalar;
+        return p;
+    }
+
+
 } SDL_FPoint;
 ```
