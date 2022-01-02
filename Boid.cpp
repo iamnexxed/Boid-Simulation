@@ -62,7 +62,33 @@ SDL_FPoint Boid::Separation()
 
 SDL_FPoint Boid::Alignment()
 {
-	SDL_FPoint p;
+	SDL_FPoint p(0, 0);
+	SDL_FPoint average;
+	int otherCount = 0;
+	for (int i = 0; i < NOOFBOIDS; ++i)
+	{
+		if (others[i].id != this->id)
+		{
+			if (GetDistance(others[i]) < DETECTION_RADIUS)
+			{
+				average.x += others[i].GetVelocity().x;
+				average.y += others[i].GetVelocity().y;
+				otherCount++;
+			}
+
+		}
+	}
+
+	if (otherCount > 0)
+	{
+		average = average / otherCount;
+		//Steer towards we get a direction towards the velocity we want to achieve
+		average = average - velocity;
+
+		return average;
+	}
+
+
 	return p;
 }
 
@@ -148,16 +174,16 @@ void Boid::Update()
 
 	acceleration += s;
 	acceleration += a;
-	acceleration += c;
+	//acceleration += c;
 
 	printf("\nGot acceleration for boid : %d at %f, %f", id, acceleration.x, acceleration.y);
 
-	//velocity += acceleration;
+	transform->position.x += (velocity.x);
+	transform->position.y += (velocity.y);
 
-	transform->position.x += (velocity.x + acceleration.x);
-	transform->position.y += (velocity.y + acceleration.y);
+	velocity += acceleration;
 
-	ApplyRotation(velocity + acceleration);
+	ApplyRotation(velocity);
 
 	if (transform->position.x <= 0)
 	{

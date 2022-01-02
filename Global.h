@@ -26,6 +26,7 @@ const int TOTAL_BUTTONS = 4;
 
 
 // Boid Parameters
-const int NOOFBOIDS = 10;
-const double STEERING_FORCE = 2;
+const int NOOFBOIDS = 50;
+const double STEERING_FORCE = 1;
 const double DETECTION_RADIUS = 100;
+const double ESCAPE_CROWD_RADIUS = 20;

@@ -106,9 +106,7 @@ int main( int argc, char* args[] )
 
 	srand((unsigned)time(&t1)); // pass the srand() parameter  
 
-	// To generate a random number between min and max
-	// int randNum = rand() % (max - min + 1) + min;
-
+	
 	LoadBoids();
 	
 	//Main loop flag
@@ -494,9 +492,14 @@ void LoadBoids()
 
 	for (int i = 0; i < NOOFBOIDS; ++i)
 	{
+		// To generate a random number between min and max
+		// int randNum = rand() % (max - min + 1) + min;
+
 		int velX = rand() % (5 + 5 + 1) - 5;
 		int velY = rand() % (5 + 5 + 1) - 5;
 
+		velX = velX == 0 ? 1 : velX;
+		velY = velY == 0 ? 1 : velY;
 		//printf("Generated Random values: %d and %d", velX, velY);
 		
 		tempBoids[i].FindOtherBoids(tempBoids);
@@ -513,7 +516,8 @@ void LoadBoids()
 		tempBoidObjects[i].AddBehaviour(sprites[i]);
 		tempBoidObjects[i].AddBehaviour(tempBoids[i]);
 		tempBoidObjects[i].StartObject();
-		
+		tempBoidObjects[i].transform.position.x = rand() % (SCREEN_WIDTH - 0 + 1) + 0;
+		tempBoidObjects[i].transform.position.y = rand() % (SCREEN_HEIGHT - 0 + 1) + 0;
 		tempBoids[i].id = i;
 	}
 
