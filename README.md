@@ -1,5 +1,5 @@
 # Boid-Simulation
- Boid simulation using C++
+A simple Boid simulation
 
 ![Boids](https://github.com/iamnexxed/Boid-Simulation/blob/main/Sprites/Boids.gif)
 
