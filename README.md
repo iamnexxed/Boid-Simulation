@@ -3,6 +3,10 @@
 
 ![Boids](https://github.com/iamnexxed/Boid-Simulation/blob/main/Sprites/Boids.gif)
 
+Technologies used:
+- SDL 
+- C++
+
 Changed SDL_Point in SDL_rect.h to
 
 ```cpp
