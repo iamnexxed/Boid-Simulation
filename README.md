@@ -1,5 +1,7 @@
 # Boid-Simulation
- Boid simulation using personal engine
+ Boid simulation using C++
+
+![Boids](https://github.com/iamnexxed/Boid-Simulation/blob/main/Sprites/Boids.gif)
 
 Changed SDL_Point in SDL_rect.h to
 
