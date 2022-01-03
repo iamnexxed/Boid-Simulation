@@ -241,22 +241,22 @@ void Boid::Update()
 
 	ApplyRotation(velocity);
 
-	if (transform->position.x <= 0)
+	if (transform->position.x + velocity.x <= 0)
 	{
-		transform->position.x = SCREEN_WIDTH;
+		velocity.x = -velocity.x;
 	}
-	else if (transform->position.x > SCREEN_WIDTH)
+	else if (transform->position.x + velocity.x > SCREEN_WIDTH)
 	{
-		transform->position.x = 0;
+		velocity.x = -velocity.x;
 	}
 
-	if (transform->position.y <= 0)
+	if (transform->position.y + velocity.y <= 0)
 	{
-		transform->position.y = SCREEN_HEIGHT;
+		velocity.y = -velocity.y;
 	}
-	else if (transform->position.y > SCREEN_HEIGHT)
+	else if (transform->position.y + velocity.y > SCREEN_HEIGHT)
 	{
-		transform->position.y = 0;
+		velocity.y = -velocity.y;
 	}
 
 }
