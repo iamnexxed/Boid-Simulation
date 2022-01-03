@@ -1,5 +1,5 @@
 # Boid-Simulation
-A simple Boid simulation
+A simple Boid simulation in 2D space
 
 ![Boids](https://github.com/iamnexxed/Boid-Simulation/blob/main/Sprites/Boids.gif)
 
