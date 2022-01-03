@@ -26,8 +26,9 @@ const int TOTAL_BUTTONS = 4;
 
 
 // Boid Parameters
-const int NOOFBOIDS = 50;
-const double MAX_STEERING_FORCE = 0.2;
+const int NOOFBOIDS = 100;
+const double COHESION_FORCE = 0.2;
+const double ALIGNMENT_FORCE = 0.2;
+const double SEPARATION_FORCE = 1.5;
 const double DETECTION_RADIUS = 50;
 const double BOID_SPEED = 4;
-const double ESCAPE_CROWD_RADIUS = 40;
